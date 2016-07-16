@@ -1,6 +1,7 @@
 package com.megalobiz.flickster.adapters;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,15 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         tvTitle.setText(movie.getOriginalTitle());
         tvOverview.setText(movie.getOverview());
 
-        Picasso.with(getContext()).load(movie.getPosterPath()).into(ivImage);
+        //Detect Layout Orientation to change dynamically from posterPath in Portait to backdropPath in Landscape
+        int orientation = getContext().getResources().getConfiguration().orientation;
+
+        if(orientation == Configuration.ORIENTATION_PORTRAIT){
+            Picasso.with(getContext()).load(movie.getPosterPath()).into(ivImage);
+        }
+        else if(orientation == Configuration.ORIENTATION_LANDSCAPE){
+            Picasso.with(getContext()).load(movie.getBackdropPath()).into(ivImage);
+        }
 
         // return the view
         return convertView;
