@@ -10,3 +10,6 @@ Time spent: in progress
 * [x] Required: Views should be responsive for both landscape/portrait mode and fully optimized for performance with the
 ViewHolder pattern.
 
+### Optional
+* [x] Advanced: Add pull-to-refresh for popular stream with SwipeRefreshLayout
+
