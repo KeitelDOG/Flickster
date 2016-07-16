@@ -12,17 +12,24 @@ import java.util.ArrayList;
 public class Movie {
 
     String posterPath;
+    String backdropPath;
     String originalTitle;
     String overview;
 
     public Movie(JSONObject jsonObject) throws JSONException {
         this.posterPath = jsonObject.getString("poster_path");
+        this.backdropPath = jsonObject.getString("backdrop_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
     }
 
     public String getPosterPath() {
         return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
+    }
+
+    public String getBackdropPath() {
+        //get width 500 (w500) for backdrop image
+        return String.format("https://image.tmdb.org/t/p/w500/%s", backdropPath);
     }
 
     public String getOriginalTitle() {
@@ -46,4 +53,5 @@ public class Movie {
 
         return results;
     }
+
 }

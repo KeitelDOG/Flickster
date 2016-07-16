@@ -2,7 +2,6 @@ package com.megalobiz.flickster;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -47,7 +46,7 @@ public class MoviesActivity extends AppCompatActivity {
                     movieJsonResults = response.getJSONArray("results");
                     movies.addAll(Movie.fromJSONArray(movieJsonResults));
                     movieAdapter.notifyDataSetChanged();
-                    Log.d("DEBUG", movies.toString());
+                    //Log.d("DEBUG", movies.toString());
                 } catch(JSONException e){
                     e.printStackTrace();
                 }
@@ -59,4 +58,6 @@ public class MoviesActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
