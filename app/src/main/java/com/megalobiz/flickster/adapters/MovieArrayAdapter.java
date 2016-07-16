@@ -70,10 +70,14 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         int orientation = getContext().getResources().getConfiguration().orientation;
 
         if(orientation == Configuration.ORIENTATION_PORTRAIT){
-            Picasso.with(getContext()).load(movie.getPosterPath()).into(viewHolder.movieImage);
+            Picasso.with(getContext()).load(movie.getPosterPath())
+                    .placeholder(R.drawable.movie_placeholder)
+                    .into(viewHolder.movieImage);
         }
         else if(orientation == Configuration.ORIENTATION_LANDSCAPE){
-            Picasso.with(getContext()).load(movie.getBackdropPath()).into(viewHolder.movieImage);
+            Picasso.with(getContext()).load(movie.getBackdropPath())
+                    .placeholder(R.drawable.movie_placeholder)
+                    .into(viewHolder.movieImage);
         }
 
         // return the view
