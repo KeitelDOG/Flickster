@@ -20,6 +20,13 @@ import java.util.List;
  */
 public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
+    //View Lookup Cache
+    public static class ViewHolder{
+        TextView title;
+        TextView overview;
+        ImageView movieImage;
+    }
+
     public MovieArrayAdapter(Context context, List<Movie> movies) {
         super(context, android.R.layout.simple_list_item_1, movies);
     }
@@ -29,33 +36,44 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         // get the data item for position
         Movie movie = getItem(position);
 
-        // check the existing vie being reused
-        if (convertView == null){
+        // check if an existing view being reused, if not inflate the view
+
+        // View Lookup cache stored in tag
+        ViewHolder viewHolder;
+
+        if (convertView == null) {
+            viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.item_movie, parent, false);
+
+            // find the image view
+            viewHolder.movieImage = (ImageView) convertView.findViewById(R.id.ivMovieImage);
+
+            // clear out image from convertView
+            viewHolder.movieImage.setImageResource(0);
+
+            viewHolder.title = (TextView) convertView.findViewById(R.id.tvTitle);
+            viewHolder.overview = (TextView) convertView.findViewById(R.id.tvOverview);
+
+            // Cache the Views
+            convertView.setTag(viewHolder);
+
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        // find the image view
-        ImageView ivImage = (ImageView) convertView.findViewById(R.id.ivMovieImage);
-
-        // clear out image from convertView
-        ivImage.setImageResource(0);
-
-        TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
-        TextView tvOverview = (TextView) convertView.findViewById(R.id.tvOverview);
-
-        // poulate data
-        tvTitle.setText(movie.getOriginalTitle());
-        tvOverview.setText(movie.getOverview());
+        // poulate data if viewHolder is not null
+        viewHolder.title.setText(movie.getOriginalTitle());
+        viewHolder.overview.setText(movie.getOverview());
 
         //Detect Layout Orientation to change dynamically from posterPath in Portait to backdropPath in Landscape
         int orientation = getContext().getResources().getConfiguration().orientation;
 
         if(orientation == Configuration.ORIENTATION_PORTRAIT){
-            Picasso.with(getContext()).load(movie.getPosterPath()).into(ivImage);
+            Picasso.with(getContext()).load(movie.getPosterPath()).into(viewHolder.movieImage);
         }
         else if(orientation == Configuration.ORIENTATION_LANDSCAPE){
-            Picasso.with(getContext()).load(movie.getBackdropPath()).into(ivImage);
+            Picasso.with(getContext()).load(movie.getBackdropPath()).into(viewHolder.movieImage);
         }
 
         // return the view
