@@ -13,4 +13,5 @@ ViewHolder pattern.
 ### Optional
 * [x] Advanced: Add pull-to-refresh for popular stream with SwipeRefreshLayout
 * [x] Advanced: Display a nice default placeholder graphic for each image during loading
+* [x] Advanced: Improve the user interface through styling and coloring
 
