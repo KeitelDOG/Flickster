@@ -17,5 +17,7 @@
         android:id="@+id/lvMovies"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="5.0sp" />
 </android.support.v4.widget.SwipeRefreshLayout>
