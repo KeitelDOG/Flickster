@@ -16,3 +16,5 @@ ViewHolder pattern.
 * [x] Advanced: Improve the user interface through styling and coloring
 * [x] Advanced: For popular movies (i.e. a movie voted for more than 5 stars), the full backdrop image is displayed. Otherwise, a poster image, the movie title, and overview is listed
 
+* [x] Bonus: Expose details of movie (ratings using RatingBar, popularity, and synopsis) in a separate activity
+

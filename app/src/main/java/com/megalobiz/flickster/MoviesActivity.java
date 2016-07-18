@@ -1,8 +1,11 @@
 package com.megalobiz.flickster;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -52,6 +55,19 @@ public class MoviesActivity extends AppCompatActivity {
         movieAdapter = new MovieArrayAdapter(this, movies);
         lvItems.setAdapter(movieAdapter);
 
+        //Listen for item click in ListView
+        lvItems.setOnItemClickListener(new ListView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Movie movie = (Movie) lvItems.getItemAtPosition(position);
+                //Toast.makeText(MoviesActivity.this, movie.getOriginalTitle(), Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(MoviesActivity.this, MovieProfileActivity.class);
+                i.putExtra("movie", movie);
+                startActivity(i);
+            }
+        });
+
         //Fetch Movie list on Create
         fetchMoviesAsync();
 
@@ -93,6 +109,9 @@ public class MoviesActivity extends AppCompatActivity {
                 super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
+
+
     }
+
 
 }
